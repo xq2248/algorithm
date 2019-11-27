@@ -21,10 +21,10 @@ type Point struct {
 }
 
 type Line struct {
-	from, to         int     //边在Point切片中的位置
-	length           float64 //边的长度
-	xDirect  float64         //边的水平方向: 取值-1,0,1
-	yDirect  float64         //边的垂直平方向: 取值-1,0,1
+	from, to int     //边在Point切片中的位置
+	length   float64 //边的长度
+	xDirect  float64 //边的水平方向: 取值-1,0,1
+	yDirect  float64 //边的垂直平方向: 取值-1,0,1
 }
 
 func equalsZero(num float64) bool {
@@ -121,12 +121,13 @@ func Walk(ps []Point, k int) {
 	var curNo int = 0            //要找的当前点序号
 	var curRes float64 = average //要找的当前点剩余长度
 
+lineLoop:
 	for _, line := range ls {
 		lineRes := line.length
 		for {
 			if lineRes < curRes {
 				curRes -= lineRes
-				goto NextLine
+				break
 			} else if lineRes == curRes {
 				lineRes = 0
 				newPoint := getPoint(&line, curRes, ps)
@@ -134,7 +135,7 @@ func Walk(ps []Point, k int) {
 				curNo++
 				curRes = average
 				if curNo == count {
-					goto Finish
+					break lineLoop
 				}
 			} else {
 				lineRes -= curRes
@@ -143,12 +144,10 @@ func Walk(ps []Point, k int) {
 				curNo++
 				curRes = average
 				if curNo == count {
-					goto Finish
+					goto lineLoop
 				}
 			}
 
 		}
-	NextLine:
 	}
-Finish:
 }
