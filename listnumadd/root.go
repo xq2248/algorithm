@@ -108,6 +108,7 @@ func (list *List) ConvertListToSlice() []uint32 {
 	return resSlice
 }
 
+//算法入口，对2个整数切片进行按位相加
 func CaculateAdd(sa, sb []uint32) []uint32 {
 	la1 := ConvertSliceToList(sa)
 	lb1 := ConvertSliceToList(sb)
