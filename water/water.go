@@ -16,7 +16,6 @@ import (
 func GetMax(stairs []uint32) (maxIdx int, maxValue uint32) {
 	maxIdx = 0
 	maxValue = uint32(0)
-
 	for i, v := range stairs {
 		if maxValue < v {
 			maxValue = stairs[i]
@@ -31,10 +30,8 @@ func RainAll(stairs []uint32) {
 	//找最大的台阶和位置
 	maxIdx, maxValue := GetMax(stairs)
 	fmt.Println(maxIdx, maxValue)
-
 	delta := make([]uint32, len(stairs))
 	var sum uint32 = 0
-
 	var leftLevel uint32 = 0
 	for i := 0; i < maxIdx; i++ {
 		if stairs[i] > leftLevel {
