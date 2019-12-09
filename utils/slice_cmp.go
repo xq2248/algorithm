@@ -1,6 +1,6 @@
 package utils
 
-// sliceCmp 比较2个整数切片
+//SliceCmp 比较2个整数切片
 func SliceCmp(c, d []int) bool {
 	if len(c) != len(d) {
 		return false
