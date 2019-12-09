@@ -1,9 +1,25 @@
+/*
+ * Copyright xq2248
+ * mail: xq2248@163.com
+ * github: xq2248
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package listnumadd
 
-//作者：大熊
-//mail: xq2248@163.com
-
 //From https://blog.csdn.net/DevolperFront/article/details/99688144
+//字节跳动公司算法面试题
 //问题2：
 //用单向列表保存2个十进制整数
 //然后实现相加,注意只能用单向链表
@@ -11,35 +27,35 @@ package listnumadd
 //实现思路：
 //将2个链表倒序，相加后，再倒序
 
-type Elem struct {
+type elem struct {
 	value uint32
-	next  *Elem
+	next  *elem
 }
 
-func NewElem(value uint32) *Elem {
-	return &Elem{value, nil}
+func newElem(value uint32) *elem {
+	return &elem{value, nil}
 }
 
-type List struct {
+type list struct {
 	number uint32
-	head   *Elem
+	head   *elem
 }
 
-func NewList() *List {
-	return &List{0, nil}
+func newList() *list {
+	return &list{0, nil}
 }
 
-func ConvertSliceToList(a []uint32) *List {
-	list := NewList()
+func convertSliceToList(a []uint32) *list {
+	list := newList()
 	for _, v := range a {
-		//ne := NewElem( v )
+		//ne := newElem( v )
 		list.addTail(v)
 	}
 	return list
 }
 
-func (list *List) addTail(value uint32) {
-	ne := NewElem(value)
+func (list *list) addTail(value uint32) {
+	ne := newElem(value)
 	if list.head == nil {
 		list.head = ne
 		list.number = 1
@@ -52,15 +68,16 @@ func (list *List) addTail(value uint32) {
 	list.number++
 }
 
-func (list *List) addHead(value uint32) {
-	ne := NewElem(value)
+func (list *list) addHead(value uint32) {
+	ne := newElem(value)
 	ne.next = list.head
 	list.head = ne
 	list.number++
 }
 
-func (list *List) Traverse() *List {
-	newList := NewList()
+//traverse 链表反转
+func (list *list) traverse() *list {
+	newList := newList()
 	cur := list.head
 	for ; cur != nil; cur = cur.next {
 		newList.addHead(cur.value)
@@ -68,8 +85,9 @@ func (list *List) Traverse() *List {
 	return newList
 }
 
-func ListAdd(a, b *List) *List {
-	newList := NewList()
+//listAdd 两个链表相加
+func listAdd(a, b *list) *list {
+	newList := newList()
 	count := a.number
 	if count < b.number {
 		count = b.number
@@ -98,7 +116,8 @@ func ListAdd(a, b *List) *List {
 	return newList
 }
 
-func (list *List) ConvertListToSlice() []uint32 {
+// convertListToSlice convert list to slice
+func (list *list) convertListToSlice() []uint32 {
 	resLen := list.number + 1
 	resSlice := make([]uint32, 0, resLen)
 	cur := list.head
@@ -108,13 +127,13 @@ func (list *List) ConvertListToSlice() []uint32 {
 	return resSlice
 }
 
-//算法入口，对2个整数切片进行按位相加
+//CaculateAdd return the addtion result of two integer slices
 func CaculateAdd(sa, sb []uint32) []uint32 {
-	la1 := ConvertSliceToList(sa)
-	lb1 := ConvertSliceToList(sb)
-	la2 := la1.Traverse()
-	lb2 := lb1.Traverse()
-	lc2 := ListAdd(la2, lb2)
-	lc1 := lc2.Traverse()
-	return lc1.ConvertListToSlice()
+	la1 := convertSliceToList(sa)
+	lb1 := convertSliceToList(sb)
+	la2 := la1.traverse()
+	lb2 := lb1.traverse()
+	lc2 := listAdd(la2, lb2)
+	lc1 := lc2.traverse()
+	return lc1.convertListToSlice()
 }

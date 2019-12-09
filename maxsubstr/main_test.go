@@ -1,5 +1,7 @@
 /*
  * Copyright xq2248
+ * mail: xq2248@163.com
+ * github: xq2248
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +16,32 @@
  * limitations under the License.
  */
 
-package container
+package maxsubstr
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-func TestWater(t *testing.T) {
-	w := []int{1, 8, 6, 2, 5, 4, 8, 3, 7}
-	r := maxArea(w)
-	if r != 49 {
-		t.Fail()
+func TestMaxSubStr(t *testing.T) {
+
+	var tests = []struct {
+		str    string
+		expect int
+	}{
+		{"bbbbbbb", 1},
+		{"dvdf", 3},
+		{"abcde", 5},
+		{"a", 1},
+		{"", 0},
 	}
+
+	for _, test := range tests {
+		res := LengthOfLongestSubstring(test.str)
+		if res != test.expect {
+			fmt.Println("sublen of ", test.str, "expect ", test.expect, "res ", res)
+			t.Fail()
+		}
+	}
+
 }

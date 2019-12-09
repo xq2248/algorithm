@@ -8,6 +8,7 @@ import (
 )
 
 //From https://blog.csdn.net/DevolperFront/article/details/99688144
+//字节跳动公司算法面试题
 //问题3：
 //有一组不同高度的台阶，用一个数组标识，数组中每个数是台阶的高度
 //如果开始下雨，那么台阶之间的水坑会积水多少呢
