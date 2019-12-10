@@ -19,20 +19,38 @@
 package sortcolors
 
 import "testing"
-import "fmt"
+import "algorithm/utils"
 
 func TestSort(t *testing.T) {
-	var ss []int = []int{2, 0, 2, 1, 1, 0}
-	fmt.Println(ss)
-	SortColors(ss)
-	fmt.Println(ss)
 
+	var tcs = []struct {
+		nums   []int
+		expect []int
+	}{
+		{[]int{2, 0, 2, 1, 1, 0}, []int{0, 0, 1, 1, 2, 2}},
+	}
+
+	for _, tc := range tcs {
+		SortColors(tc.nums)
+		if !utils.SliceCmp(tc.nums, tc.expect) {
+			t.Fail()
+		}
+	}
 }
 
 func TestSort2(t *testing.T) {
-	var ss []int = []int{2, 0, 2, 1, 1, 0}
-	fmt.Println(ss)
-	SortColors2(ss)
-	fmt.Println(ss)
 
+	var tcs = []struct {
+		nums   []int
+		expect []int
+	}{
+		{[]int{2, 0, 2, 1, 1, 0}, []int{0, 0, 1, 1, 2, 2}},
+	}
+
+	for _, tc := range tcs {
+		SortColors2(tc.nums)
+		if !utils.SliceCmp(tc.nums, tc.expect) {
+			t.Fail()
+		}
+	}
 }

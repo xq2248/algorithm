@@ -19,7 +19,7 @@
 package sortcolors
 
 //https://leetcode-cn.com/problems/sort-colors/
-//算法描述：有三种颜色的数组，将数组按照红、白、蓝排列
+//算法描述：有三种颜色的数组，将数组按照红、白、蓝排列，分别用0，1，2代替
 //最简单的解法，肯定是排序算法，但是排序算法时间复杂度很高
 //利用数组中的元素只有3种值，可以实现更高效的排序算法
 
@@ -47,6 +47,7 @@ func SortColors(nums []int) {
 }
 
 //SortColors: 官方推荐的实现
+//对格子进行遍历，记录红色和蓝色的位置，对于红色的往左移动，对于蓝色的往右移动
 func SortColors2(nums []int) {
 	count := len(nums)
 	left, right := 0, count-1
