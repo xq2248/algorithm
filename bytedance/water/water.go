@@ -27,11 +27,11 @@ func GetMax(stairs []uint32) (maxIdx int, maxValue uint32) {
 }
 
 func RainAll(stairs []uint32) {
-	fmt.Println(stairs)
+
 	//找最大的台阶和位置
-	maxIdx, maxValue := GetMax(stairs)
-	fmt.Println(maxIdx, maxValue)
+	maxIdx, _ := GetMax(stairs)
 	delta := make([]uint32, len(stairs))
+
 	var sum uint32 = 0
 	var leftLevel uint32 = 0
 	for i := 0; i < maxIdx; i++ {
